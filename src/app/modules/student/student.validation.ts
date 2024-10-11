@@ -1,50 +1,41 @@
-// import { z } from 'zod';
+import { z } from "zod";
 
-// const userNameSchema = z.object({
-//   firstName: z
-//     .string()
-//     .min(1)
-//     .max(20)
-//     .refine((value) => /^[A-Z]/.test(value), {
-//       message: 'First Name must start with a capital letter',
-//     }),
-//   middleName: z.string(),
-//   lastName: z.string(),
-// });
+const createStudentValidationSchema = z.object({
+  body: z.object({
+    //TODO: make id dynamic (batch number wise)
+    id: z.string({ required_error: "ID is required" }),
+    name: z.string({ required_error: "Name is required" }),
+    email: z
+      .string({ required_error: "Email is required." })
+      .email("Invalid email"),
+    password: z.string(),
+    profileImg: z.string().optional(),
+    contactNo: z.string({ required_error: "Contact number is required" }),
+    role: z.enum(["student"]).default("student"),
+    status: z.enum(["active", "blocked"]).default("active"),
+    address: z.string({ required_error: "Address is required" }),
+    dateOfBirth: z.string({ required_error: "Date of birth is required" }),
+    gender: z.enum(["male", "female", "other"], {
+      required_error: "Gender is required",
+    }),
+  }),
+});
+const updateStudentValidationSchema = z.object({
+  body: z.object({
+    name: z.string().optional(),
+    profileImg: z.string().optional(),
+    contactNo: z.string().optional(),
+    address: z.string().optional(),
+    dateOfBirth: z.string().optional(),
+    gender: z
+      .enum(["male", "female", "other"], {
+        required_error: "Gender is required",
+      })
+      .optional(),
+  }),
+});
 
-// const guardianSchema = z.object({
-//   fatherName: z.string(),
-//   fatherOccupation: z.string(),
-//   fatherContactNo: z.string(),
-//   motherName: z.string(),
-//   motherOccupation: z.string(),
-//   motherContactNo: z.string(),
-// });
-
-// const localGuardianSchema = z.object({
-//   name: z.string(),
-//   occupation: z.string(),
-//   contactNo: z.string(),
-//   address: z.string(),
-// });
-
-// export const studentValidationSchema = z.object({
-//   id: z.string(),
-//   password: z.string().max(20),
-//   name: userNameSchema,
-//   gender: z.enum(['male', 'female', 'other']),
-//   dateOfBirth: z.string(),
-//   email: z.string().email(),
-//   contactNo: z.string(),
-//   emergencyContactNo: z.string(),
-//   bloogGroup: z.enum(['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']),
-//   presentAddress: z.string(),
-//   permanentAddress: z.string(),
-//   guardian: guardianSchema,
-//   localGuardian: localGuardianSchema,
-//   profileImg: z.string(),
-//   isActive: z.enum(['active', 'blocked']).default('active'),
-//   isDeleted: z.boolean().optional().default(false),
-// });
-
-// export default studentValidationSchema;
+export const userValidation = {
+  createStudentValidationSchema,
+  updateStudentValidationSchema,
+};

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { UserRoutes } from "../modules/user/user.route";
+import { StudentRoutes } from "../modules/student/student.route";
 import { CourseRoutes } from "../modules/course/course.route";
 import { ReviewRoutes } from "../modules/reviews/review.route";
 import { BatchRoutes } from "../modules/batch/batch.routes";
@@ -9,8 +9,8 @@ const router = Router();
 
 const moduleRoutes = [
   {
-    path: "/users",
-    routes: UserRoutes,
+    path: "/student",
+    routes: StudentRoutes,
   },
   {
     path: "/course",
