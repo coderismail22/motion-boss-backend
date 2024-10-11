@@ -4,10 +4,15 @@ import { CourseRoutes } from "../modules/course/course.route";
 import { ReviewRoutes } from "../modules/reviews/review.route";
 import { BatchRoutes } from "../modules/batch/batch.routes";
 import { EnrollmentRoutes } from "../modules/enrollment/enrollment.routes";
+import { AuthRoutes } from "../modules/auth/auth.route";
 
 const router = Router();
 
 const moduleRoutes = [
+  {
+    path: "/auth",
+    routes: AuthRoutes,
+  },
   {
     path: "/student",
     routes: StudentRoutes,
