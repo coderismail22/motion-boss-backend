@@ -25,7 +25,7 @@ const moduleRoutes = [
     routes: BatchRoutes,
   },
   {
-    path: "/environment",
+    path: "/enrollment",
     routes: EnrollmentRoutes,
   },
 ];
